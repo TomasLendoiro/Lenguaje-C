@@ -1,0 +1,21 @@
+#include <stdio.h>
+
+int jubilacion(int);
+int main(void)
+{
+    int edad,respuesta;
+
+    printf("ingrese su edad:\n");
+    scanf("%d",&edad);
+
+    respuesta=jubilacion(edad);
+    printf("te faltan %d years para jubilarte\n",respuesta);
+
+    return 0;
+}
+
+int jubilacion(int e)
+{
+int a=65-e;
+
+}

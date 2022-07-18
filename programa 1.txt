@@ -1,0 +1,24 @@
+#include <stdio.h>
+
+
+int main ()
+{
+    float radio, superficie;
+
+    printf("        Bienvenido\n");
+
+            printf("ingrese el radio de una circunferencia:\n");
+
+                    scanf("%f",&radio);
+if(radio>0){
+    superficie= 3.14 * radio * radio;
+
+
+                printf("la edad es: %f\n",superficie);
+}else
+
+printf("el valor es menor a 1 intente de nuevo\n");
+
+        return 0;
+
+}

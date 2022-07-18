@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int i=0,sup=0,largo=0,ancho=0,acum=0,supm=0,contporc=0;
+
+
+    printf("ingrese largo\n");
+            scanf("%d",&largo);
+
+                printf("ingrese ancho\n");
+                        scanf("%d",&ancho);
+
+    while(largo>0 && ancho>0){
+//a)
+     i++;
+
+     //b)
+
+     sup=largo*ancho;
+     acum=acum+sup;
+
+     //c)
+
+     if (sup>supm){
+     supm=sup;
+
+     }
+      printf("ingrese largo\n");
+            scanf("%d",&largo);
+                    printf("ingrese ancho\n");
+                            scanf("%d",&ancho);
+    }
+
+//d)
+if(sup >200){
+    contporc++;
+
+}
+
+    printf("cantidad de piezas ingresadad %d\n",i);
+    printf("promedio de las superficies es %.2f cmm\n",(float)acum/i);
+    printf("la superficie mayor es %d cmm\n",supm);
+    printf("porcentaje solicitado es %.2f \n",(float)contporc/i*100);
+    printf("\n\n");
+    return 0;
+}

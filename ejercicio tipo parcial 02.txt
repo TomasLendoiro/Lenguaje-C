@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+float bonif(float, float, int);
+
+int main()
+{
+    float basico,bonificacion,sueldototal;
+    int tipo;
+
+    printf("ingrese sueldo basico: \n");
+    scanf("%f",&basico);
+
+    printf("ingrese tipo de bonificacion: (1$ 2=%%) \n");
+    scanf("%d",&tipo);
+
+    printf("ingrese bonificacion: \n");
+    scanf("%f",&bonificacion);
+
+    sueldototal= bonif(basico,bonificacion,tipo);
+
+    printf("\nsueldo total :%.2f",sueldototal);
+
+    printf("\n\n");
+
+
+ return 0;
+}
+
+
+float bonif (float sbasico,float bonif,int tipo){
+
+
+float resultado;
+
+if(tipo==1){
+    resultado=sbasico+bonif;
+}else{
+    resultado=sbasico+(bonif/100*sbasico);
+}
+return resultado;
+}

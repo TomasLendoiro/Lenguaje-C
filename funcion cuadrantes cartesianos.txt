@@ -1,0 +1,39 @@
+#include <stdio.h>
+
+void cuadrante(int,int);
+
+int main(void)
+{
+    int x,y;
+
+    printf("ingrese dat en x:\n");
+    scanf("%d",&x);
+    printf("ingrese dato en y:\n");
+    scanf("%i",&y);
+
+
+    cuadrante(x,y);
+
+    printf("\n");
+
+    return 0;
+}
+
+void cuadrante(int x, int y)
+{
+if( x == 0 && y >= 0) {
+    printf("estoy centrado en el origen\n");
+} else {
+if(x>= 0 && y >= 0){
+printf("estoy en el 1 cuadrante\n");
+}if(x<0&&y>=0){
+printf("estoy en el 2 cuadrante\n");
+}
+if(x<0 && y <=0){
+    printf(" estoy en el 3 cuadrante\n");
+}if(x>0&& y<=0){
+printf("estoy en el 4 cuadrante\n");
+}
+    }
+return;
+}

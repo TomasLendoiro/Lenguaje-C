@@ -1,0 +1,19 @@
+#include <stdio.h>
+
+int main()
+{
+    int i,res,tabla;
+
+    printf("\n que tabla desea saber? ");
+        scanf("%d",&tabla);
+
+    for (i=0; i<11; i++)
+    {
+
+        res=i*tabla;
+        printf("%i x %i=%i\n",tabla,i,res);
+
+    }
+
+    return 0;
+}
