@@ -1,0 +1,396 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+
+struct tirador{
+int numparticipante,edad;
+char nombre[15],apellido[15],sexo;
+float disparo1,disparo2,disparo3,mejordisparo, promDisparo;
+};
+
+struct str {
+float mejdisparo,promedio;
+
+};
+float disparo(float disparoenx ,float disparoeny);/*funcion andando NO TOCAR!!*/
+void podio(int a, struct tirador participante[a]);/*funcion de podio*/
+void ultimoparticipante(int a, struct tirador participante[a]);
+void hMasGrande(int a, struct tirador participante[a]);
+void mMasJoven(int a, struct tirador participante[a]);
+void lista_ordenada_por_edad(int a, struct tirador participante[a]);
+void lista_participantes_mayor_al_promedio(int a, struct tirador participante[a], int promedio);
+
+struct str pro(float,float,float);
+
+int main(void){
+
+struct tirador participante[999];
+struct str valores;
+int i=0,ii=0,id=0,u,mujeres=0,aux=0,hombres=0,p=0;
+
+float disparo1enx=0 ,acumulador=0,promdisp=0,disparo1eny=0,disparo2enx=0,disparo2eny=0,disparo3enx=0,disparo3eny=0;
+
+
+
+
+
+
+    fflush(stdin);
+    printf("ingrese el numero unico de participante\n");
+    scanf("%i",&participante[i].numparticipante);
+
+while(participante[i].numparticipante!=999){
+
+printf("ingrese edad del participante\n");
+                scanf("%i",&participante[i].edad);
+                printf("usted ingreso %i\n",participante[i].edad);
+    fflush(stdin);
+    printf("ingrese nombre del participante\n");
+    fgets(participante[i].nombre,15,stdin);
+    printf("usted ingreso %s\n",participante[i].nombre);
+
+                    printf("ingrese apellido del participante\n");
+                    fgets(participante[i].apellido,15,stdin);
+                    printf("usted ingreso %s\n",participante[i].apellido);
+
+
+
+                                printf("ingrese sexo del participante (m /  f) \n");
+                                    scanf("%c",&participante[i].sexo);
+                                            if(participante[i].sexo=='m'){
+                                                hombres++;
+
+
+
+
+                                            }else{
+                                                mujeres++;
+
+                                            }
+
+
+
+
+
+
+
+
+            printf("ingrese coordenadas del disparo 1 en x\n");
+                scanf("%f",&disparo1enx);
+                    printf("ingrese coordenadas del disparo 1 en y\n");
+                        scanf("%f",&disparo1eny);
+                        participante[i].disparo1=disparo(disparo1enx,disparo1eny);
+                                printf("el disparo 1 impacto en %.2f: \n",participante[i].disparo1);
+
+
+                            printf("ingrese coordenadas del disparo 2 en x\n");
+                                scanf("%f",&disparo2enx);
+                                    printf("ingrese coordenadas del disparo 2 en y\n");
+                                        scanf("%f",&disparo2eny);
+                                            participante[i].disparo2=disparo(disparo2enx,disparo2eny);
+                                                printf("el disparo 2 impacto en %.2f: \n",participante[i].disparo2);
+
+
+                                            printf("ingrese coordenadas del disparo 3 en x\n");
+                                                scanf("%f",&disparo3enx);
+                                                    printf("ingrese coordenadas del disparo 3 en y\n");
+                                                        scanf("%f",&disparo3eny);
+                                                            participante[i].disparo3=disparo(disparo3enx,disparo3eny);
+                                                                printf("el disparo 3 impacto en %.2f: \n",participante[i].disparo3);
+
+
+                                                    valores=pro(participante[i].disparo1,participante[i].disparo2,participante[i].disparo3);
+
+                                                    participante[i].mejordisparo =valores.mejdisparo;
+                                                    participante[i].promDisparo =valores.promedio;
+
+                                                    printf("el mejor disparo del tirador es %.2f\n",valores.mejdisparo);
+
+                                                        printf("el promedio de los disparos del tirador es %.2f\n",valores.promedio);
+
+printf("\n");
+
+
+acumulador=acumulador+participante[i].mejordisparo;
+
+promdisp=acumulador/(float)p;
+p++;
+
+
+
+
+
+for (ii=0 ;  ii<100-1 ; ii++)
+{
+	for(id=0; id<100-1; id++)
+	{
+		if ( participante[id].edad <  participante[id+1].edad)
+		{
+			aux =  participante[id].edad;
+			 participante[id].edad =  participante[id+1].edad;
+			 participante[id+1].edad = aux;
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+    fflush(stdin);
+    printf("ingrese el numero unico de participante\n");
+    scanf("%i",&participante[i].numparticipante);
+
+
+}while(participante[i].numparticipante!=999);
+
+
+podio(p, participante);
+ultimoparticipante( p, participante);
+
+printf("la cantidad de participantes del torneo es %i: \n",p);
+printf("la cantidad de participantes hombres es:%i \n",hombres);
+printf("la cantidad de mujeres es %i: \n",mujeres);
+
+hMasGrande(p, participante);
+mMasJoven(p, participante);
+lista_ordenada_por_edad(p, participante);
+
+printf("el promedio de todos los disparos es: %.2f \n",promdisp);
+
+lista_participantes_mayor_al_promedio(p, participante, promdisp);
+
+
+
+
+
+    return 0;
+
+}
+
+
+
+
+
+
+
+
+float disparo(float x,float y){
+
+float rad=0,rad2=0,menrad=0,mayrad=0;
+     float l=0,m=0,errados=0;
+
+
+                        rad=sqrt((x*x)+(y*y));
+                        rad2=sqrt((x*x)+(y*y));
+                         if(l==0){
+
+            menrad=rad;
+
+         }else{
+         if(rad>menrad)menrad=rad;
+         }
+
+         if(m==0){
+            mayrad==rad2;
+
+         }else{
+            if(rad2<mayrad)mayrad=rad2;
+
+         }
+if(rad>80){
+    printf("el disparo fue fuera del blanco \n");
+
+return 81;
+
+
+}else{
+
+}
+
+
+return rad;
+
+}
+
+void podio(int a, struct tirador participante[a]){ /* Indica el podio de participante con mejor disparo*/
+    struct tirador max[3];
+    struct tirador aux;
+    int i,j;
+    max[0]=participante[0];
+    max[1]=participante[1];
+    max[2]=participante[2];
+    for(i=0;i<3;i++){
+    	for(j=i+1;j<3;j++){
+            if(max[i].mejordisparo>max[j].mejordisparo){
+    			aux=max[i];
+    			max[i]=max[j];
+    			max[j]=aux;
+            }
+        }
+    }
+
+
+    for(i=3; i<a;i++){
+        if(participante[i].mejordisparo<max[0].mejordisparo){
+            max[2]=max[1];
+            max[1]=max[0];
+            max[0]= participante[i];
+        }else if(participante[i].mejordisparo<max[1].mejordisparo){
+            max[2]=max[1];
+            max[1]= participante[i];
+        }else if(participante[i].mejordisparo<max[2].mejordisparo){
+            max[2]= participante[i];
+        }
+    }
+    printf("\nPodio de ganadores\n");
+    printf("\n----------------------------\n");
+    printf("\nParticipante\tNombre\tApellido\t\tMejordisparo\n");
+
+    printf("\nPRIMER PUESTO\n");
+    printf("\n%i\t\t%s\t%s\t\t%.2f\n",max[0].numparticipante,max[0].nombre,max[0].apellido,max[0].mejordisparo);
+    printf("\nSEGUNDO PUESTO\n");
+    printf("\n%i\t\t%s\t%s\t\t%.2f\n",max[1].numparticipante,max[1].nombre,max[1].apellido,max[1].mejordisparo);
+    printf("\nTERCER PUESTO\n");
+    printf("\n%i\t\t%s\t%s\t\t%.2f\n",max[2].numparticipante,max[2].nombre,max[2].apellido,max[2].mejordisparo);
+
+}
+
+void ultimoparticipante(int a, struct tirador participante[a]){ /* Indicar el ultimo participante con peor disparo*/
+    struct tirador ultimo;
+    int i,j;
+    ultimo=participante[0];
+    for(i=1;i<a;i++){
+        if(participante[i].mejordisparo<ultimo.mejordisparo){
+        }
+    }
+    printf("\nUltimo lugar\n");
+    printf("\n----------------------------\n");
+    printf("\nParticipante\tNombre\tApellido\tMejordisparo\n");
+    printf("\n%i\t%s\t%s\t%.2f\n",ultimo.numparticipante,ultimo.nombre,ultimo.apellido,ultimo.mejordisparo);
+
+
+}
+
+void hMasGrande(int a, struct tirador participante[a]){ /* Indica la edad del hombre mas grande*/
+    struct tirador mayor;
+    int i;
+    mayor=participante[0];
+    for(i=1;i<a;i++){
+        if(participante[i].edad>mayor.edad){
+            mayor=participante[i];
+        }
+    }
+    printf("\nLa edad del hombre mas grande es %i\n",mayor.edad);
+
+
+}
+
+void mMasJoven(int a, struct tirador participante[a]){ /* Indica la edad de la mujer mas joven*/
+    struct tirador joven;
+    int i;
+    joven=participante[0];
+    for(i=1;i<a;i++){
+        if(participante[i].edad<joven.edad){
+            joven=participante[i];
+        }
+    }
+    printf("\nLa edad de la mujer mas joven es %i\n",joven.edad);
+
+
+}
+
+void lista_ordenada_por_edad(int a, struct tirador participante[a]){ /* Indica Lista de participantes ordenados por edad*/
+    struct tirador lista[a];
+    struct tirador aux;
+    int i,j;
+    for(i=0;i<a;i++){
+        lista[i]=participante[i];
+    }
+
+
+    for(i=0;i<a;i++){
+    	for(j=i+1;j<a;j++){
+            if(lista[i].edad>lista[j].edad){
+    			aux=lista[i];
+    			lista[i]=lista[j];
+    			lista[j]=aux;
+            }
+        }
+    }
+    printf("\nLista de participantes ordenados por edad\n");
+    printf("\n-------------------------------------------------\n");
+    printf("\nParticipante\tNombre\tApellido\tEdad\n");
+
+    for(i=0;i<a;i++){
+        printf("\n%i\t%s\t%s\t%i\n",lista[i].numparticipante,lista[i].nombre,lista[i].apellido,lista[i].edad);
+    }
+    printf("\nFin de la lista\n");
+
+}
+
+void lista_participantes_mayor_al_promedio(int a, struct tirador participante[a], int promedio){ /* Indica Lista de participantes cuyo promedio de disparo es mayor al promedio general*/
+    struct tirador lista[a];
+    int i;
+    for(i=0;i<a;i++){
+        lista[i]=participante[i];
+    }
+
+    printf("\nLista de participantes cuyo promedio de disparo es mayor al promedio general de %.2f\n", promedio );
+    printf("\n-------------------------------------------------\n");
+    printf("\nParticipante\tNombre\tApellido\tPromedio\n");
+
+    for(i=0;i<a;i++){
+        if(lista[i].promDisparo>promedio){
+            printf("\n%i\t%s\t%s\t%i\n",lista[i].numparticipante,lista[i].nombre,lista[i].apellido,lista[i].promDisparo);
+        }
+    }
+    printf("\nFin de la lista\n");
+
+}
+
+
+
+
+
+struct str pro(float x,float y,float z){
+float min,prom;
+struct str a;
+prom=(x+y+z)/3;
+        if(x<y){
+            if(x<z){
+                min=x;
+                    }
+            else{
+                min=z;
+                        }
+
+                    }
+            else{
+                    if(y<z){
+                            min=y;
+
+        }
+                else{
+                        min=z;
+            }
+        }
+
+a.promedio=prom;
+a.mejdisparo=min;
+
+
+
+
+
+
+return a;
+};
+
+
